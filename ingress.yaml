@@ -1,20 +1,16 @@
-FROM node:8
-
-# Create app directory
-WORKDIR /usr/src/app/src
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
-RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
-ENV MICROS_PRODUCTS_URL=product-service-java.eu-gb.mybluemix.net/products
-# Bundle app source
-RUN mkdir src
-COPY src src
-
-EXPOSE 3001
-CMD [ "npm", "start" ]
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: shipping-service-ingress
+  namespace: lab-cnb-3
+  labels:
+    app: shipping-service
+spec:
+  rules:
+  - host: shipping-service-lab-cnb-3.cnb-barcelona-2020-4541c909052590f055286494a1af3e6a-0001.eu-gb.containers.appdomain.cloud
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: shipping-service-svc
+          servicePort: app-port
