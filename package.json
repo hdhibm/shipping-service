@@ -4,7 +4,12 @@
     "nock": "^11.7.2",
     "sinon": "^8.1.1"
   },
+  "scripts": {
+    "test": "jest tests --env=node",
+    "start": "node src/app.js"
+  },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "express": "^4.17.1"
   }
 }
